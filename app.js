@@ -104,9 +104,16 @@ if (!['zh', 'en'].includes(language)) language = 'zh';
 const portraitSrc = 'assets/avatar.png';
 const universityUrl = 'https://hss.cuhk.edu.cn/en/node/1722';
 const arrow = '<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
-const sectionHeading = title => `<header class="section-heading"><h2>${title}</h2></header>`;
+const star = '<svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><path d="M32 0c2 23 9 30 32 32-23 2-30 9-32 32C30 41 23 34 0 32 23 30 30 23 32 0Z"/></svg>';
+const paw = '<svg class="paw-icon" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="7" cy="12" rx="3" ry="4" transform="rotate(-25 7 12)"/><ellipse cx="13" cy="7" rx="3" ry="4"/><ellipse cx="21" cy="7" rx="3" ry="4"/><ellipse cx="27" cy="13" rx="3" ry="4" transform="rotate(25 27 13)"/><path d="M8 23c0-4 5-10 9-10s9 6 9 10c0 7-6 3-9 3s-9 4-9-3"/></g></svg>';
+const skillIcons = [
+  '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 6H9v8l-3 2 3 2v8h3M20 6h3v8l3 2-3 2v8h-3M18 9l-4 14"/></svg>',
+  '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 3v26M4.74 9.5l22.52 13M4.74 22.5l22.52-13"/><circle cx="16" cy="16" r="5"/></svg>',
+  '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 8h20M6 16h20M6 24h20"/><circle cx="12" cy="8" r="3" fill="white"/><circle cx="21" cy="16" r="3" fill="white"/><circle cx="13" cy="24" r="3" fill="white"/></svg>'
+];
+const sectionHeading = (title, id) => `<header class="section-heading"><h2${id ? ` id="${id}"` : ''}>${title}</h2></header>`;
 const schoolLink = label => `<a class="university-link" href="${universityUrl}" target="_blank" rel="noopener noreferrer">${label}${arrow}</a>`;
-const disclosure = (label, body, id) => `<details class="entry-details" data-disclosure="${id}"><summary><span>${label}</span><span class="expand-icon" aria-hidden="true">+</span></summary>${body}</details>`;
+const disclosure = (label, body, id, open = false) => `<details class="entry-details" data-disclosure="${id}"${open ? ' open' : ''}><summary><span>${label}</span><span class="expand-icon" aria-hidden="true">+</span></summary>${body}</details>`;
 
 function render() {
   const t = content[language];
@@ -119,51 +126,62 @@ function render() {
   document.getElementById('mobile-nav').innerHTML = nav;
   const portraitLabel = language === 'zh' ? '程一鸣的个人头像' : 'Yiming Cheng’s personal avatar';
   document.getElementById('main').innerHTML = `
-    <section class="hero container" id="home" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <h1 id="hero-title">${t.name}</h1>
-        <p class="secondary-name">${t.secondary}</p>
-        <div class="hero-identity"><p class="hero-role">${t.role}</p><p class="hero-institution">${t.institution}</p></div>
-        <p class="hero-interests">${t.focus.join(' · ')}</p>
-        <p class="hero-intro">${t.intro}</p>
-        <a class="primary-link" href="#experience">${t.overview}<span aria-hidden="true">↓</span></a>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-stage">
+        <div class="hero-orbit" aria-hidden="true"></div><span class="hero-spark" aria-hidden="true">${star}</span>
+        <div class="hero-copy"><h1 id="hero-title">${t.name}</h1><p class="secondary-name">${t.secondary}</p></div>
+        <div class="portrait-composition"><div class="portrait-backdrop" aria-hidden="true"></div><div class="portrait-slot"><img src="${portraitSrc}" alt="${portraitLabel}" width="940" height="940" decoding="async" fetchpriority="high"></div><span class="portrait-dot" aria-hidden="true"></span></div>
+        <a class="scroll-link" href="#about" aria-label="${language === 'zh' ? '向下浏览关于我' : 'Scroll to About Me'}"><span>${language === 'zh' ? '向下浏览' : 'SCROLL TO EXPLORE'}</span><span aria-hidden="true">↓</span></a>
+        <span class="hero-corner" aria-hidden="true"></span>
       </div>
-      <div class="portrait-slot${portraitSrc ? ' has-image' : ''}">${portraitSrc ? `<img src="${portraitSrc}" alt="${portraitLabel}" width="240" height="240" decoding="async" fetchpriority="high">` : `<span class="visually-hidden">${language === 'zh' ? '预留个人头像位置' : 'Space reserved for a personal avatar'}</span>`}</div>
     </section>
 
-    <section class="section container" id="about" aria-labelledby="about-title">
-      <header class="section-heading"><h2 id="about-title">${t.aboutTitle}</h2></header>
-      <div class="section-body about-copy">${t.aboutText.map(p => `<p>${p}</p>`).join('')}
-        <p class="personal-note"><svg class="paw-icon" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="7" cy="12" rx="3" ry="4" transform="rotate(-25 7 12)"/><ellipse cx="13" cy="7" rx="3" ry="4"/><ellipse cx="21" cy="7" rx="3" ry="4"/><ellipse cx="27" cy="13" rx="3" ry="4" transform="rotate(25 27 13)"/><path d="M8 23c0-4 5-10 9-10s9 6 9 10c0 7-6 3-9 3s-9 4-9-3"/></g></svg><span>${t.personalNote}</span></p>
-      </div>
-    </section>
+    <section class="about-section" id="about" aria-labelledby="about-title"><div class="container section">
+      ${sectionHeading(t.aboutTitle, 'about-title')}
+      <div class="about-layout"><div class="about-copy">${t.aboutText.map(p => `<p>${p}</p>`).join('')}<p class="about-experience">${t.intro}</p></div><aside class="personal-note"><span class="paw-disc">${paw}</span><p>${t.personalNote}</p></aside></div>
+    </div></section>
 
     <section class="section container" id="education">${sectionHeading(t.nav[1])}
-      <div class="section-body education-list">${t.education.map(e => `<article class="education-entry"><div><h3>${e.name}</h3><p class="degree">${e.title}${e.note ? `<span class="education-note"> · ${e.note}</span>` : ''}</p>${e.text ? `<p class="entry-description">${e.text}</p>` : ''}<p class="location">${e.location}</p></div><p class="date">${e.date}</p></article>`).join('')}</div>
+      <div class="education-grid">${t.education.map(e => `<article class="education-entry reveal"><div class="education-meta"><span class="location">${e.location}</span><span class="education-corner" aria-hidden="true"></span></div><h3>${e.name}</h3><div class="education-bottom"><p class="degree">${e.title}</p>${e.note ? `<p class="education-note">${e.note}</p>` : ''}${e.text ? `<p class="entry-description">${e.text}</p>` : ''}<p class="date">${e.date}</p></div></article>`).join('')}</div>
     </section>
 
     <section class="section container" id="experience">${sectionHeading(t.nav[2])}
-      <div class="section-body experience-list">${t.experience.map((e, i) => `<article class="experience-entry"><div class="entry-heading"><h3>${e.name}</h3><p class="date">${e.date}</p></div><p class="role">${e.title}</p><p class="entry-description">${e.summary}</p>${disclosure(t.expDetails, `<ul>${e.points.map(p => `<li>${p}</li>`).join('')}</ul>`, `experience-${i}`)}</article>`).join('')}</div>
+      <div class="experience-list">${t.experience.map((e, i) => `<article class="experience-entry reveal"><div class="company-panel"><p class="company-label">${e.label}</p><div><h3>${e.name}</h3><p class="role">${e.title}</p></div><p class="date">${e.date}</p></div><div class="experience-copy"><p class="entry-description">${e.summary}</p>${disclosure(t.expDetails, `<ul>${e.points.map(p => `<li>${p}</li>`).join('')}</ul>`, `experience-${i}`, i === 0)}</div></article>`).join('')}</div>
     </section>
 
     <section class="research-section" id="research"><div class="section container">${sectionHeading(t.nav[3])}
-      <div class="section-body research-list">${t.projects.map((p, i) => `<article class="research-entry"><div class="entry-heading"><h3>${p.name}</h3><p class="date">${p.date}</p></div><p class="role">${p.org}</p><p class="entry-description">${p.summary}</p><p class="project-methods">${p.tags.join(' · ')}</p>${disclosure(t.details, `<p>${p.details}</p>`, `research-${i}`)}</article>`).join('')}</div>
+      <div class="research-grid">${t.projects.map((p, i) => `<article class="research-entry reveal"><div class="project-topline"><span class="project-category">${p.category}</span>${i === 0 ? `<span class="project-spark" aria-hidden="true">${star}</span>` : ''}</div><h3>${p.name}</h3><p class="role">${p.org}</p><p class="date">${p.date}</p><p class="entry-description">${p.summary}</p><p class="project-methods">${p.tags.join(' · ')}</p>${disclosure(t.details, `<p>${p.details}</p>`, `research-${i}`, i === 0)}</article>`).join('')}</div>
     </div></section>
 
     <section class="section container" id="skills">${sectionHeading(t.nav[4])}
-      <div class="section-body skills-list">${t.skillGroups.map(s => `<article class="skill-group"><h3>${s.title}</h3><p>${s.items.join(' / ')}</p></article>`).join('')}</div>
+      <div class="skills-grid">${t.skillGroups.map((s, i) => `<article class="skill-group reveal"><div class="skill-icon">${skillIcons[i]}</div><h3>${s.title}</h3><ul>${s.items.map(item => `<li>${item}</li>`).join('')}</ul></article>`).join('')}</div>
     </section>
 
-    <section class="section contact-section container" id="contact">${sectionHeading(t.contactTitle)}
-      <div class="section-body"><div class="contact-links">${emails.map((email, i) => `<div class="contact-entry"><p class="contact-label">${i === 0 ? t.personalEmail : t.universityEmail}</p><div class="email-row"><a class="email-link" href="mailto:${email}">${email}</a><button type="button" class="copy-email" data-email="${email}" aria-label="${t.copy}: ${email}">${t.copy}</button></div><span class="copy-status" role="status" aria-live="polite"></span></div>`).join('')}</div>${schoolLink(t.universityProfile)}</div>
-    </section>`;
-  document.getElementById('footer').innerHTML = `<div class="container footer-content"><span>${t.footer}</span><a class="back-top" href="#home">${t.top} ↑</a></div>`;
+    <section class="contact-section" id="contact"><div class="container contact-layout"><div class="contact-heading">${sectionHeading(t.contactTitle)}<p>${t.contactText}</p><span class="contact-spark" aria-hidden="true">${star}</span></div>
+      <div class="contact-body"><div class="contact-links">${emails.map((email, i) => `<div class="contact-entry"><p class="contact-label">${i === 0 ? t.personalEmail : t.universityEmail}</p><a class="email-link" href="mailto:${email}">${email}${arrow}</a><div class="copy-row"><button type="button" class="copy-email" data-email="${email}" aria-label="${t.copy}: ${email}">${t.copy}</button><span class="copy-status" role="status" aria-live="polite"></span></div></div>`).join('')}</div>${schoolLink(t.universityProfile)}</div>
+    </div></section>`;
+  document.getElementById('footer').innerHTML = `<div class="container footer-content"><a class="footer-monogram" href="#home" aria-label="Yiming Cheng — Home">yc<span>.</span></a><span>${t.footer}</span><a class="back-top" href="#home">${t.top} ↑</a></div>`;
   document.querySelectorAll('.copy-email').forEach(button => button.addEventListener('click', async () => {
     const status = button.closest('.contact-entry').querySelector('.copy-status');
     try { await navigator.clipboard.writeText(button.dataset.email); status.textContent = t.copied; }
     catch { status.textContent = t.copyFail; }
   }));
   observeSections();
+  observeReveals();
+}
+
+let revealObserver;
+function observeReveals() {
+  revealObserver?.disconnect();
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  revealObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    }
+  }, { threshold: 0.08 });
+  // Content always remains readable; entry animation never starts from opacity zero.
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }
 
 let observer;
@@ -192,12 +210,15 @@ matchMedia('(min-width: 901px)').addEventListener('change', e => { if (e.matches
 document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => {
   if (button.dataset.lang === language) return;
   const sectionId = document.querySelector('nav a[aria-current]')?.hash;
-  const expanded = [...document.querySelectorAll('details[open]')].map(details => details.dataset.disclosure);
+  const disclosureStates = [...document.querySelectorAll('details')].map(details => [details.dataset.disclosure, details.open]);
   const atHome = window.scrollY < document.getElementById('about').offsetTop - 100;
   language = button.dataset.lang;
   try { localStorage.setItem('yc-language', language); } catch {}
   render(); closeMenu();
-  for (const id of expanded) document.querySelector(`[data-disclosure="${id}"]`)?.setAttribute('open', '');
+  for (const [id, open] of disclosureStates) {
+    const details = document.querySelector(`[data-disclosure="${id}"]`);
+    if (details) details.open = open;
+  }
   if (sectionId && !atHome) document.querySelector(sectionId)?.scrollIntoView({ behavior: 'instant' });
 }));
 render();
