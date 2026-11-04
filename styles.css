@@ -144,12 +144,13 @@ h3 { font-size: 21px; line-height: 1.6; font-weight: 550; }
 
 /* Skills are organized into readable groups, without a cloud of small tags. */
 .skills-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px; }
-.skill-group { padding: 29px; border-radius: 20px; background: #f6f9fe; }
-.skill-icon { width: 51px; height: 51px; display: grid; place-items: center; border-radius: 15px; color: var(--blue); background: #e0ecff; margin-bottom: 22px; }
-.skill-icon svg { width: 29px; height: 29px; }
-.skill-group h3 { font-size: 22px; margin-bottom: 17px; }
-.skill-group ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
-.skill-group li { font-size: 14px; line-height: 1.75; color: var(--muted); overflow-wrap: anywhere; }
+.skill-group { display: grid; grid-template-columns: 42px minmax(0, 1fr); column-gap: 18px; align-content: start; padding: 24px; border-radius: 20px; background: #f6f9fe; }
+.skill-icon { width: 42px; height: 42px; display: grid; place-items: center; grid-row: span 2; border-radius: 13px; color: var(--blue); background: #e0ecff; }
+.skill-icon svg { width: 26px; height: 26px; }
+.skill-group h3 { font-size: 20px; line-height: 1.45; margin-bottom: 8px; }
+.skill-group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; row-gap: 4px; }
+.skill-group li { display: inline-flex; align-items: baseline; white-space: nowrap; font-size: 14px; line-height: 1.75; color: var(--muted); }
+.skill-group li + li::before { content: '·'; margin-inline: 9px; }
 
 /* The navy closing is a deliberate contrast to the lighter sections. */
 .contact-section { background: var(--navy); color: white; }
@@ -203,7 +204,6 @@ footer { background: var(--navy); color: #bccfe8; }
   .experience-entry { gap: 28px; }
   .company-panel { padding: 26px; }
   .research-entry { padding-inline: 26px; }
-  .skill-group { padding: 24px; }
   .skills-grid { gap: 18px; }
   .contact-layout { gap: 50px; }
   .email-link { font-size: 20px; }
@@ -249,8 +249,6 @@ footer { background: var(--navy); color: #bccfe8; }
   .research-grid { grid-template-columns: 1fr; gap: 18px; }
   .research-entry { padding: 24px 25px 15px; }
   .research-entry h3 { font-size: 23px; }
-  .skill-group ul { grid-template-columns: 1fr; gap: 9px; }
-  .skill-group h3 { font-size: 20px; }
   .contact-layout { grid-template-columns: .8fr 1.2fr; gap: 35px; padding-block: 55px; }
   .contact-heading h2, html[lang=en] .contact-heading h2 { font-size: 52px; }
   .email-link { font-size: 17px; }
@@ -309,10 +307,8 @@ footer { background: var(--navy); color: #bccfe8; }
   .research-entry { padding: 27px 25px; }
   .research-entry h3 { font-size: 25px; }
   .skills-grid { grid-template-columns: 1fr; gap: 16px; }
-  .skill-group { display: grid; grid-template-columns: 45px minmax(0, 1fr); column-gap: 17px; padding: 24px; }
-  .skill-icon { width: 45px; height: 45px; margin: 0; grid-row: span 2; border-radius: 13px; }
-  .skill-group h3 { font-size: 20px; margin-bottom: 14px; line-height: 1.5; padding-top: 6px; }
-  .skill-group ul { grid-template-columns: 1fr; gap: 7px; }
+  .skill-group { padding: 22px; column-gap: 15px; }
+  .skill-group h3 { font-size: 18px; }
   .contact-layout { grid-template-columns: 1fr; gap: 36px; padding-block: 44px; }
   .contact-heading h2, html[lang=en] .contact-heading h2 { font-size: 53px; line-height: 1.15; }
   .contact-heading { position: relative; padding-right: 25px; }
@@ -335,7 +331,7 @@ footer { background: var(--navy); color: #bccfe8; }
   .scroll-link { left: 23px; }
   .email-link { font-size: 15px; }
   .personal-note { padding: 18px; gap: 13px; }
-  .skill-group { padding: 21px; gap: 14px; }
+  .skill-group { padding: 20px; column-gap: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

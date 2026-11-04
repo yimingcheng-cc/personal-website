@@ -41,8 +41,8 @@ const content = {
     ],
     details: '项目详情', expDetails: '工作内容',
     skillGroups: [
-      { title: '编程与数据', items: ['Python', 'R'] },
-      { title: 'AI 工具与开发', items: ['LLM API 调用', 'Codex', 'Vibe coding'] }
+      { title: '编程与数据分析', items: ['Python', 'R', 'Stata'] },
+      { title: 'AI 工具与应用', items: ['LLM API 调用', 'Codex'] }
     ],
     contactKicker: 'CONTACT', contactTitle: '联系我', contactText: '欢迎就实习机会、学术交流或研究相关话题与我联系。', copy: '复制邮箱', copied: '已复制', copyFail: '未能复制，请手动选择邮箱', footer: '程一鸣 · 学术与职业档案', top: '回到顶部',
   },
@@ -86,8 +86,8 @@ const content = {
     ],
     details: 'Project details', expDetails: 'Responsibilities',
     skillGroups: [
-      { title: 'Programming & Data', items: ['Python', 'R'] },
-      { title: 'AI Tools & Development', items: ['LLM API integration', 'Codex', 'Vibe coding'] }
+      { title: 'Programming & Data Analysis', items: ['Python', 'R', 'Stata'] },
+      { title: 'AI Tools & Applications', items: ['LLM API integration', 'Codex'] }
     ],
     contactKicker: 'CONTACT', contactTitle: 'Get in touch', contactText: 'For internship opportunities, academic exchange, or conversations about research, feel free to reach out.', copy: 'Copy email', copied: 'Copied', copyFail: 'Could not copy; please select the email manually', footer: 'Yiming Cheng · Academic & professional profile', top: 'Back to top',
   }
