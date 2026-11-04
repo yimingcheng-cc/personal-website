@@ -1,10 +1,11 @@
 # Original avatar
 
-The avatar visible in chat is not available as a readable file in this workspace.
-No replacement image has been generated or downloaded.
+`avatar.png` is the original 940 × 940 PNG supplied by the user in a ZIP attachment.
+It has not been regenerated, edited, cropped, or recompressed.
 
-Once the original PNG/JPG is available, copy it here without changing its bytes,
-set `portraitSrc` in `app.js` to its relative path (for example `assets/avatar.jpg`),
-and verify image loading in both the development and production preview.
-The build copies supported image files from this folder without recompression.
-The reserved square uses `object-fit: contain`, so the full image remains visible.
+SHA-256: `6fcd7ae65530f401016a938794b2045598dd7b8c462fd3daedf1c2967598eb91`
+
+`portraitSrc` in `app.js` references this file. The build copies image files byte
+for byte into `dist/assets/`. The existing responsive layout uses
+`object-fit: contain` and preserves the complete square image.
+This note is excluded from the production build.

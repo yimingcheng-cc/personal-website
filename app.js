@@ -100,9 +100,8 @@ const ids = ['about', 'education', 'experience', 'research', 'skills', 'contact'
 let language;
 try { language = localStorage.getItem('yc-language'); } catch {}
 if (!['zh', 'en'].includes(language)) language = 'zh';
-// The original image must be supplied as a downloadable file before this is set.
-// Store it unchanged in assets/; the build copies image files byte for byte.
-const portraitSrc = null;
+// User-supplied original image; copied to the build without recompression.
+const portraitSrc = 'assets/avatar.png';
 const universityUrl = 'https://hss.cuhk.edu.cn/en/node/1722';
 const arrow = '<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
 const sectionHeading = title => `<header class="section-heading"><h2>${title}</h2></header>`;
