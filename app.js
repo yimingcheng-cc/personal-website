@@ -100,9 +100,14 @@ const ids = ['about', 'education', 'experience', 'research', 'skills', 'contact'
 let language;
 try { language = localStorage.getItem('yc-language'); } catch {}
 if (!['zh', 'en'].includes(language)) language = 'zh';
+// The original image must be supplied as a downloadable file before this is set.
+// Store it unchanged in assets/; the build copies image files byte for byte.
+const portraitSrc = null;
+const universityUrl = 'https://hss.cuhk.edu.cn/en/node/1722';
 const arrow = '<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
-const heading = (n, title, subtitle) => `<div class="section-heading"><div><span class="section-number">0${n}</span><h2>${title}</h2></div><p>${subtitle}</p></div>`;
-const tags = items => `<div class="tags">${items.map(x => `<span>${x}</span>`).join('')}</div>`;
+const sectionHeading = title => `<header class="section-heading"><h2>${title}</h2></header>`;
+const schoolLink = label => `<a class="university-link" href="${universityUrl}" target="_blank" rel="noopener noreferrer">${label}${arrow}</a>`;
+const disclosure = (label, body, id) => `<details class="entry-details" data-disclosure="${id}"><summary><span>${label}</span><span class="expand-icon" aria-hidden="true">+</span></summary>${body}</details>`;
 
 function render() {
   const t = content[language];
@@ -113,37 +118,49 @@ function render() {
   const nav = ids.map((id, i) => `<a href="#${id}">${t.nav[i]}</a>`).join('');
   document.getElementById('desktop-nav').innerHTML = nav;
   document.getElementById('mobile-nav').innerHTML = nav;
+  const portraitLabel = language === 'zh' ? '程一鸣的个人头像' : 'Yiming Cheng’s personal avatar';
   document.getElementById('main').innerHTML = `
     <section class="hero container" id="home" aria-labelledby="hero-title">
-      <div class="hero-copy"><p class="eyebrow"><span class="small-line"></span>${t.kicker}</p>
-        <h1 id="hero-title">${t.name}<span class="secondary-name">${t.secondary}</span><span class="name-dot">.</span></h1>
-        <p class="hero-role">${t.role}</p><p class="hero-institution">${t.institution}</p><div class="hero-focus"><span class="mini-label">${t.focusLabel}</span>${tags(t.focus)}</div><p class="hero-intro">${t.intro}</p>
-        <div class="hero-actions"><a class="button primary" href="#experience">${t.overview}${arrow}</a><a class="text-link" href="#contact">${t.connect}<span aria-hidden="true">→</span></a></div>
+      <div class="hero-copy">
+        <h1 id="hero-title">${t.name}</h1>
+        <p class="secondary-name">${t.secondary}</p>
+        <div class="hero-identity"><p class="hero-role">${t.role}</p><p class="hero-institution">${t.institution}</p></div>
+        <p class="hero-interests">${t.focus.join(' · ')}</p>
+        <p class="hero-intro">${t.intro}</p>
+        <a class="primary-link" href="#experience">${t.overview}<span aria-hidden="true">↓</span></a>
       </div>
-      <aside class="profile-card" aria-label="${t.academicPath}">
-        <p class="mini-label">${t.academicPath}</p>
-        <div class="profile-degrees">${t.education.map((e, i) => `<div><span class="degree-index">0${i + 1}</span><div><strong>${e.name}</strong><p>${e.title}</p><span class="date">${e.date}</span></div></div>`).join('')}</div>
-        <a class="university-link" href="https://hss.cuhk.edu.cn/en/node/1722" target="_blank" rel="noopener noreferrer">${t.universityProfile}${arrow}</a>
-      </aside>
+      <div class="portrait-slot${portraitSrc ? ' has-image' : ''}">${portraitSrc ? `<img src="${portraitSrc}" alt="${portraitLabel}" width="240" height="240" decoding="async" fetchpriority="high">` : `<span class="visually-hidden">${language === 'zh' ? '预留个人头像位置' : 'Space reserved for a personal avatar'}</span>`}</div>
     </section>
-    <section class="about-section" id="about" aria-labelledby="about-title"><div class="container about-layout">
-      <div class="about-heading"><p class="eyebrow">${t.aboutLabel}</p><h2 id="about-title">${t.aboutTitle}</h2><a class="text-link" href="https://hss.cuhk.edu.cn/en/node/1722" target="_blank" rel="noopener noreferrer">${t.universityProfile}${arrow}</a></div>
-      <div class="about-copy">${t.aboutText.map(p => `<p>${p}</p>`).join('')}<div class="personal-note"><svg class="paw-icon" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="7" cy="12" rx="3" ry="4" transform="rotate(-25 7 12)"/><ellipse cx="13" cy="7" rx="3" ry="4"/><ellipse cx="21" cy="7" rx="3" ry="4"/><ellipse cx="27" cy="13" rx="3" ry="4" transform="rotate(25 27 13)"/><path d="M8 23c0-4 5-10 9-10s9 6 9 10c0 7-6 3-9 3s-9 4-9-3"/></g></svg><p>${t.personalNote}</p></div></div>
+
+    <section class="section container" id="about" aria-labelledby="about-title">
+      <header class="section-heading"><h2 id="about-title">${t.aboutTitle}</h2></header>
+      <div class="section-body about-copy">${t.aboutText.map(p => `<p>${p}</p>`).join('')}
+        <p class="personal-note"><svg class="paw-icon" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="7" cy="12" rx="3" ry="4" transform="rotate(-25 7 12)"/><ellipse cx="13" cy="7" rx="3" ry="4"/><ellipse cx="21" cy="7" rx="3" ry="4"/><ellipse cx="27" cy="13" rx="3" ry="4" transform="rotate(25 27 13)"/><path d="M8 23c0-4 5-10 9-10s9 6 9 10c0 7-6 3-9 3s-9 4-9-3"/></g></svg><span>${t.personalNote}</span></p>
+      </div>
+    </section>
+
+    <section class="section container" id="education">${sectionHeading(t.nav[1])}
+      <div class="section-body education-list">${t.education.map(e => `<article class="education-entry"><div><h3>${e.name}</h3><p class="degree">${e.title}${e.note ? `<span class="education-note"> · ${e.note}</span>` : ''}</p>${e.text ? `<p class="entry-description">${e.text}</p>` : ''}<p class="location">${e.location}</p></div><p class="date">${e.date}</p></article>`).join('')}</div>
+    </section>
+
+    <section class="section container" id="experience">${sectionHeading(t.nav[2])}
+      <div class="section-body experience-list">${t.experience.map((e, i) => `<article class="experience-entry"><div class="entry-heading"><h3>${e.name}</h3><p class="date">${e.date}</p></div><p class="role">${e.title}</p><p class="entry-description">${e.summary}</p>${disclosure(t.expDetails, `<ul>${e.points.map(p => `<li>${p}</li>`).join('')}</ul>`, `experience-${i}`)}</article>`).join('')}</div>
+    </section>
+
+    <section class="research-section" id="research"><div class="section container">${sectionHeading(t.nav[3])}
+      <div class="section-body research-list">${t.projects.map((p, i) => `<article class="research-entry"><div class="entry-heading"><h3>${p.name}</h3><p class="date">${p.date}</p></div><p class="role">${p.org}</p><p class="entry-description">${p.summary}</p><p class="project-methods">${p.tags.join(' · ')}</p>${disclosure(t.details, `<p>${p.details}</p>`, `research-${i}`)}</article>`).join('')}</div>
     </div></section>
-    <section class="section container" id="education">${heading(1, t.nav[1], t.sectionIntro[0])}
-      <div class="education-list">${t.education.map((e, i) => `<article class="education-row"><div class="date"><span class="timeline-dot ${i === 0 ? 'current' : ''}"></span>${e.date}</div><div class="education-body"><div class="education-title"><h3>${e.name}</h3><span class="location">${e.location}</span></div><div class="degree-line"><p>${e.title}</p>${e.note ? `<span class="badge">${e.note}</span>` : ''}</div>${e.text ? `<p class="muted education-note">${e.text}</p>` : ''}</div></article>`).join('')}</div>
+
+    <section class="section container" id="skills">${sectionHeading(t.nav[4])}
+      <div class="section-body skills-list">${t.skillGroups.map(s => `<article class="skill-group"><h3>${s.title}</h3><p>${s.items.join(' / ')}</p></article>`).join('')}</div>
     </section>
-    <section class="section experience-section" id="experience"><div class="container">${heading(2, t.nav[2], t.sectionIntro[1])}
-      <div class="experience-list">${t.experience.map((e, i) => `<article class="experience-row"><div class="experience-meta"><span class="company-index">0${i + 1}</span><span class="date">${e.date}</span></div><div class="experience-body"><p class="mini-label accent">${e.label}</p><h3>${e.name}</h3><p class="role">${e.title}</p><p class="muted">${e.summary}</p><details class="work-details"${i === 0 ? ' open' : ''}><summary>${t.expDetails}<span class="expand-icon" aria-hidden="true">+</span></summary><ul>${e.points.map(p => `<li>${p}</li>`).join('')}</ul></details></div></article>`).join('')}</div>
-    </div></section>
-    <section class="section container" id="research">${heading(3, t.nav[3], t.sectionIntro[2])}
-      <div class="project-grid">${t.projects.map((p, i) => `<article class="project-card"><div class="project-top"><span class="project-number">0${i + 1}</span><span class="project-symbol" aria-hidden="true">${['⌘', '≋', arrow][i]}</span></div><p class="mini-label accent">${p.category}</p><h3>${p.name}</h3><p class="project-org">${p.org}</p><p class="date">${p.date}</p><p class="project-summary">${p.summary}</p>${tags(p.tags)}<details class="project-details"><summary>${t.details}<span class="expand-icon" aria-hidden="true">+</span></summary><p>${p.details}</p></details></article>`).join('')}</div>
-    </section>
-    <section class="section container" id="skills">${heading(4, t.nav[4], t.sectionIntro[3])}<div class="skills-grid">${t.skillGroups.map((s, i) => `<article class="skill-group"><span class="skill-icon" aria-hidden="true">${['{ }', '<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2v20M3.34 7l17.32 10M3.34 17 20.66 7"/></svg>', arrow][i]}</span><h3>${s.title}</h3>${tags(s.items)}</article>`).join('')}</div></section>
-    <section class="contact-section" id="contact"><div class="container contact-layout"><div><p class="eyebrow">${t.contactKicker}</p><h2>${t.contactTitle}</h2><p>${t.contactText}</p></div><div class="contact-links">${emails.map((email, i) => `<div class="email-card"><span class="mini-label">${i === 0 ? t.personalEmail : t.universityEmail}</span><a class="email-link" href="mailto:${email}">${email}${arrow}</a><div class="copy-row"><button type="button" class="copy-email" data-email="${email}" aria-label="${t.copy}: ${email}">${t.copy}<span aria-hidden="true">⧉</span></button><span class="copy-status" role="status" aria-live="polite"></span></div></div>`).join('')}</div></div></section>`;
-  document.getElementById('footer').innerHTML = `<div class="container footer-content"><a class="wordmark" href="#home" aria-label="Yiming Cheng — Home">yc<span>.</span></a><span>${t.footer}</span><a class="back-top" href="#home">${t.top} ↑</a></div>`;
+
+    <section class="section contact-section container" id="contact">${sectionHeading(t.contactTitle)}
+      <div class="section-body"><div class="contact-links">${emails.map((email, i) => `<div class="contact-entry"><p class="contact-label">${i === 0 ? t.personalEmail : t.universityEmail}</p><div class="email-row"><a class="email-link" href="mailto:${email}">${email}</a><button type="button" class="copy-email" data-email="${email}" aria-label="${t.copy}: ${email}">${t.copy}</button></div><span class="copy-status" role="status" aria-live="polite"></span></div>`).join('')}</div>${schoolLink(t.universityProfile)}</div>
+    </section>`;
+  document.getElementById('footer').innerHTML = `<div class="container footer-content"><span>${t.footer}</span><a class="back-top" href="#home">${t.top} ↑</a></div>`;
   document.querySelectorAll('.copy-email').forEach(button => button.addEventListener('click', async () => {
-    const status = button.nextElementSibling;
+    const status = button.closest('.contact-entry').querySelector('.copy-status');
     try { await navigator.clipboard.writeText(button.dataset.email); status.textContent = t.copied; }
     catch { status.textContent = t.copyFail; }
   }));
@@ -176,10 +193,12 @@ matchMedia('(min-width: 901px)').addEventListener('change', e => { if (e.matches
 document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => {
   if (button.dataset.lang === language) return;
   const sectionId = document.querySelector('nav a[aria-current]')?.hash;
+  const expanded = [...document.querySelectorAll('details[open]')].map(details => details.dataset.disclosure);
   const atHome = window.scrollY < document.getElementById('about').offsetTop - 100;
   language = button.dataset.lang;
   try { localStorage.setItem('yc-language', language); } catch {}
   render(); closeMenu();
+  for (const id of expanded) document.querySelector(`[data-disclosure="${id}"]`)?.setAttribute('open', '');
   if (sectionId && !atHome) document.querySelector(sectionId)?.scrollIntoView({ behavior: 'instant' });
 }));
 render();
