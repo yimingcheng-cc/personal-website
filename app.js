@@ -2,12 +2,12 @@
 // No analytics or third-party runtime requests.
 const content = {
   zh: {
-    nav: ['关于我', '教育经历', '职业经历', '研究项目', '专业技能', '联系我'],
+    nav: ['关于我', '教育经历', '实习经历', '研究项目', '专业技能', '联系我'],
     kicker: '计算社会科学 · 人工智能研究', name: '程一鸣', secondary: 'Yiming Cheng',
     intro: '曾在字节跳动、复星创富和毕马威实习，从事 AI 行业研究、投资研究与风险咨询。',
     role: '计算社会科学 · 博士二年级',
     aboutTitle: '关于我', aboutLabel: 'ABOUT ME',
-    aboutText: ['你好，我是程一鸣，目前就读于香港中文大学（深圳）计算社会科学专业，是一名博士二年级学生。', '我的研究涉及大语言模型、文本挖掘与量化分析，也对 AI 行业研究和科技投资感兴趣。'],
+    aboutText: ['你好，我是程一鸣，目前就读于香港中文大学（深圳）计算社会科学专业，是一名博士二年级学生。我的研究涉及大语言模型、文本挖掘与量化分析，也对 AI 行业研究和科技投资感兴趣。'],
     personalNote: '还有一个小小的愿望：希望博士毕业后，能拥有一只属于自己的小狗或小猫。',
     universityProfile: '学校个人主页', academicPath: '教育背景',
     overview: '查看经历', personalEmail: '常用邮箱', universityEmail: '学校邮箱',
@@ -17,7 +17,7 @@ const content = {
     education: [
       { date: '2025.09 — 至今', name: '香港中文大学（深圳）', location: '中国', title: '计算社会科学博士', note: '全额奖学金', text: '' },
       { date: '2022.09 — 2023.09', name: '华威大学', location: '英国', title: '经济学硕士', note: '', text: '' },
-      { date: '2018.09 — 2022.06', name: '西南大学', location: '中国', title: '经济学学士', note: '211 工程', text: '' }
+      { date: '2018.09 — 2022.06', name: '西南大学', location: '中国', title: '经济学学士', note: '', text: '' }
     ],
     experience: [
       { date: '2026.06 — 2026.08', name: '字节跳动', label: '科技与组织研究', title: '管理研究院 · 高招实习生', summary: '主要从事 AI 行业研究、组织分析及 AI 转型背景下的人才研究。', points: [
@@ -35,25 +35,24 @@ const content = {
       ] }
     ],
     projects: [
-      { date: '2026.08 — 至今', category: 'LLM SAFETY', name: '大语言模型安全评测', org: '研究助理', summary: '使用 Python 统计拒答率与攻击成功率，比较大语言模型的安全防护表现。', details: '参与基于 TAP（Tree of Attacks with Pruning）的对抗攻击策略讨论；使用 Python 统计模型拒答率、攻击成功率等指标，对比模型在直接请求与对抗攻击下的安全防护表现。', tags: ['Python', 'TAP', '安全评测'] },
-      { date: '2026.04 — 至今', category: 'AI-ASSISTED EVIDENCE', name: '证据与差距图谱（EGM）', org: '联合国儿童基金会驻华办事处 · 研究助理', summary: '参与约 300 篇文献的人工编码，并使用 LLM 辅助分类与 Prompt 优化。', details: '参与约 300 篇文献的人工编码，使用 LLM 辅助文献分类；对比人工与 AI 编码结果，识别主要误判类型并迭代优化 Prompt，提升编码一致性。', tags: ['LLM', 'Prompt 优化', '文献编码'] },
-      { date: '2024.04 — 2024.06', category: 'SUSTAINABILITY & DATA', name: '可持续发展研究', org: '帝国理工学院（英国）· 兼职研究助理', summary: '匹配 300 余条电力公司及基站名称，通过地理坐标交叉验证，准确率达 95% 以上。', details: '使用 Stata 清洗印度尼西亚能源行业数据，通过模糊匹配完成 300 余条电力公司及基站名称匹配，并结合地理坐标交叉验证，匹配准确率达 95% 以上。', tags: ['Stata', '模糊匹配', '数据清洗'] }
+      { date: '2026.08 — 至今', name: '大语言模型安全评测', org: '研究助理', details: '参与基于 TAP（Tree of Attacks with Pruning）的对抗攻击策略讨论；使用 Python 统计模型拒答率、攻击成功率等指标，对比模型在直接请求与对抗攻击下的安全防护表现。' },
+      { date: '2026.04 — 至今', name: '证据与差距图谱（EGM）', org: '联合国儿童基金会驻华办事处 · 研究助理', details: '参与约 300 篇文献的人工编码，使用 LLM 辅助文献分类；对比人工与 AI 编码结果，识别主要误判类型并迭代优化 Prompt，提升编码一致性。' },
+      { date: '2024.04 — 2024.06', name: '可持续发展研究', org: '帝国理工学院（英国）· 兼职研究助理', details: '使用 Stata 清洗印度尼西亚能源行业数据，通过模糊匹配完成 300 余条电力公司及基站名称匹配，并结合地理坐标交叉验证，匹配准确率达 95% 以上。' }
     ],
     details: '项目详情', expDetails: '工作内容',
     skillGroups: [
-      { title: '数据与分析', items: ['Python', 'R', 'Stata', 'Excel'] },
-      { title: '大语言模型', items: ['LLM API 调用', 'Prompt 优化', '文本挖掘', '模型安全评测'] },
-      { title: '研究方法', items: ['行业研究', '文献编码', '模糊匹配', '量化分析'] }
+      { title: '编程与数据', items: ['Python', 'R'] },
+      { title: 'AI 工具与开发', items: ['LLM API 调用', 'Codex', 'Vibe coding'] }
     ],
     contactKicker: 'CONTACT', contactTitle: '联系我', contactText: '欢迎就实习机会、学术交流或研究相关话题与我联系。', copy: '复制邮箱', copied: '已复制', copyFail: '未能复制，请手动选择邮箱', footer: '程一鸣 · 学术与职业档案', top: '回到顶部',
   },
   en: {
-    nav: ['About', 'Education', 'Experience', 'Research', 'Skills', 'Contact'],
+    nav: ['About', 'Education', 'Internships', 'Research', 'Skills', 'Contact'],
     kicker: 'COMPUTATIONAL SOCIAL SCIENCE · AI RESEARCH', name: 'Yiming Cheng', secondary: '程一鸣',
     intro: 'Internship experience at ByteDance, Fosun Capital, and KPMG, working on AI industry research, investment research, and risk consulting.',
     role: 'Second-year PhD student · Computational Social Science',
     aboutTitle: 'About Me', aboutLabel: 'ABOUT ME',
-    aboutText: ['Hello, I’m Yiming, a second-year PhD student in Computational Social Science at The Chinese University of Hong Kong, Shenzhen.', 'My research involves large language models, text mining, and quantitative analysis. I’m also interested in AI industry research and technology investment.'],
+    aboutText: ['Hello, I’m Yiming, a second-year PhD student in Computational Social Science at The Chinese University of Hong Kong, Shenzhen. My research involves large language models, text mining, and quantitative analysis. I’m also interested in AI industry research and technology investment.'],
     personalNote: 'A small wish for life after my PhD: a dog or cat of my own.',
     universityProfile: 'University Profile', academicPath: 'EDUCATION',
     overview: 'View experience', personalEmail: 'Personal email', universityEmail: 'University email',
@@ -63,7 +62,7 @@ const content = {
     education: [
       { date: 'Sep 2025 — Present', name: 'The Chinese University of Hong Kong, Shenzhen', location: 'China', title: 'PhD in Computational Social Science', note: 'Full scholarship', text: '' },
       { date: 'Sep 2022 — Sep 2023', name: 'University of Warwick', location: 'United Kingdom', title: 'Master’s in Economics', note: '', text: '' },
-      { date: 'Sep 2018 — Jun 2022', name: 'Southwest University', location: 'China', title: 'Bachelor’s in Economics', note: 'Project 211 university', text: '' }
+      { date: 'Sep 2018 — Jun 2022', name: 'Southwest University', location: 'China', title: 'Bachelor’s in Economics', note: '', text: '' }
     ],
     experience: [
       { date: 'Jun 2026 — Aug 2026', name: 'ByteDance', label: 'TECHNOLOGY & ORGANIZATIONS', title: 'Management Research Institute · Intern', summary: 'Researched the AI industry, organizational structures, and talent needs during AI transformation.', points: [
@@ -81,15 +80,14 @@ const content = {
       ] }
     ],
     projects: [
-      { date: 'Aug 2026 — Present', category: 'LLM SAFETY', name: 'Large Language Model Safety Evaluation', org: 'Research Assistant', summary: 'Used Python to calculate refusal and attack success rates when comparing LLM safeguards.', details: 'Contributed to discussions of adversarial attack strategies based on TAP (Tree of Attacks with Pruning). Used Python to calculate refusal rates and attack success rates, comparing model safeguards under direct requests and adversarial attacks.', tags: ['Python', 'TAP', 'Safety evaluation'] },
-      { date: 'Apr 2026 — Present', category: 'AI-ASSISTED EVIDENCE', name: 'Evidence and Gap Map (EGM)', org: 'UNICEF China Office · Research Assistant', summary: 'Helped manually code approximately 300 papers and used LLMs for classification and prompt refinement.', details: 'Contributed to manual coding of approximately 300 papers and LLM-assisted literature classification. Compared human and AI coding, identified major misclassification patterns, and iteratively refined prompts to improve agreement.', tags: ['LLM', 'Prompt optimization', 'Literature coding'] },
-      { date: 'Apr 2024 — Jun 2024', category: 'SUSTAINABILITY & DATA', name: 'Sustainability Research', org: 'Imperial College London · Part-time Research Assistant', summary: 'Matched over 300 power company and base-station names, with over 95% accuracy after geographic cross-validation.', details: 'Cleaned Indonesian energy-sector data using Stata. Applied fuzzy matching to over 300 power company and base-station names, cross-validated with geographic coordinates, and achieved matching accuracy above 95%.', tags: ['Stata', 'Fuzzy matching', 'Data cleaning'] }
+      { date: 'Aug 2026 — Present', name: 'Large Language Model Safety Evaluation', org: 'Research Assistant', details: 'Contributed to discussions of adversarial attack strategies based on TAP (Tree of Attacks with Pruning). Used Python to calculate refusal rates and attack success rates, comparing model safeguards under direct requests and adversarial attacks.' },
+      { date: 'Apr 2026 — Present', name: 'Evidence and Gap Map (EGM)', org: 'UNICEF China Office · Research Assistant', details: 'Contributed to manual coding of approximately 300 papers and LLM-assisted literature classification. Compared human and AI coding, identified major misclassification patterns, and iteratively refined prompts to improve agreement.' },
+      { date: 'Apr 2024 — Jun 2024', name: 'Sustainability Research', org: 'Imperial College London · Part-time Research Assistant', details: 'Cleaned Indonesian energy-sector data using Stata. Applied fuzzy matching to over 300 power company and base-station names, cross-validated with geographic coordinates, and achieved matching accuracy above 95%.' }
     ],
     details: 'Project details', expDetails: 'Responsibilities',
     skillGroups: [
-      { title: 'Data & analytics', items: ['Python', 'R', 'Stata', 'Excel'] },
-      { title: 'Large language models', items: ['LLM APIs', 'Prompt optimization', 'Text mining', 'Model safety evaluation'] },
-      { title: 'Research methods', items: ['Industry research', 'Literature coding', 'Fuzzy matching', 'Quantitative analysis'] }
+      { title: 'Programming & Data', items: ['Python', 'R'] },
+      { title: 'AI Tools & Development', items: ['LLM API integration', 'Codex', 'Vibe coding'] }
     ],
     contactKicker: 'CONTACT', contactTitle: 'Get in touch', contactText: 'For internship opportunities, academic exchange, or conversations about research, feel free to reach out.', copy: 'Copy email', copied: 'Copied', copyFail: 'Could not copy; please select the email manually', footer: 'Yiming Cheng · Academic & professional profile', top: 'Back to top',
   }
@@ -108,8 +106,7 @@ const star = '<svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><p
 const paw = '<svg class="paw-icon" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="7" cy="12" rx="3" ry="4" transform="rotate(-25 7 12)"/><ellipse cx="13" cy="7" rx="3" ry="4"/><ellipse cx="21" cy="7" rx="3" ry="4"/><ellipse cx="27" cy="13" rx="3" ry="4" transform="rotate(25 27 13)"/><path d="M8 23c0-4 5-10 9-10s9 6 9 10c0 7-6 3-9 3s-9 4-9-3"/></g></svg>';
 const skillIcons = [
   '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 6H9v8l-3 2 3 2v8h3M20 6h3v8l3 2-3 2v8h-3M18 9l-4 14"/></svg>',
-  '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 3v26M4.74 9.5l22.52 13M4.74 22.5l22.52-13"/><circle cx="16" cy="16" r="5"/></svg>',
-  '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 8h20M6 16h20M6 24h20"/><circle cx="12" cy="8" r="3" fill="white"/><circle cx="21" cy="16" r="3" fill="white"/><circle cx="13" cy="24" r="3" fill="white"/></svg>'
+  '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 3v26M4.74 9.5l22.52 13M4.74 22.5l22.52-13"/><circle cx="16" cy="16" r="5"/></svg>'
 ];
 const sectionHeading = (title, id) => `<header class="section-heading"><h2${id ? ` id="${id}"` : ''}>${title}</h2></header>`;
 const schoolLink = label => `<a class="university-link" href="${universityUrl}" target="_blank" rel="noopener noreferrer">${label}${arrow}</a>`;
@@ -150,7 +147,7 @@ function render() {
     </section>
 
     <section class="research-section" id="research"><div class="section container">${sectionHeading(t.nav[3])}
-      <div class="research-grid">${t.projects.map((p, i) => `<article class="research-entry reveal"><div class="project-topline"><span class="project-category">${p.category}</span>${i === 0 ? `<span class="project-spark" aria-hidden="true">${star}</span>` : ''}</div><h3>${p.name}</h3><p class="role">${p.org}</p><p class="date">${p.date}</p><p class="entry-description">${p.summary}</p><p class="project-methods">${p.tags.join(' · ')}</p>${disclosure(t.details, `<p>${p.details}</p>`, `research-${i}`, i === 0)}</article>`).join('')}</div>
+      <div class="research-grid">${t.projects.map(p => `<article class="research-entry reveal"><h3>${p.name}</h3><p class="date">${p.date}</p><div class="project-content"><p class="project-org">${p.org}</p><p>${p.details}</p></div></article>`).join('')}</div>
     </div></section>
 
     <section class="section container" id="skills">${sectionHeading(t.nav[4])}
@@ -160,7 +157,7 @@ function render() {
     <section class="contact-section" id="contact"><div class="container contact-layout"><div class="contact-heading">${sectionHeading(t.contactTitle)}<p>${t.contactText}</p><span class="contact-spark" aria-hidden="true">${star}</span></div>
       <div class="contact-body"><div class="contact-links">${emails.map((email, i) => `<div class="contact-entry"><p class="contact-label">${i === 0 ? t.personalEmail : t.universityEmail}</p><a class="email-link" href="mailto:${email}">${email}${arrow}</a><div class="copy-row"><button type="button" class="copy-email" data-email="${email}" aria-label="${t.copy}: ${email}">${t.copy}</button><span class="copy-status" role="status" aria-live="polite"></span></div></div>`).join('')}</div>${schoolLink(t.universityProfile)}</div>
     </div></section>`;
-  document.getElementById('footer').innerHTML = `<div class="container footer-content"><a class="footer-monogram" href="#home" aria-label="Yiming Cheng — Home">yc<span>.</span></a><span>${t.footer}</span><a class="back-top" href="#home">${t.top} ↑</a></div>`;
+  document.getElementById('footer').innerHTML = `<div class="container footer-content"><a class="footer-monogram" href="#home" aria-label="Yiming Cheng — Home">yiming</a><span>${t.footer}</span><a class="back-top" href="#home">${t.top} ↑</a></div>`;
   document.querySelectorAll('.copy-email').forEach(button => button.addEventListener('click', async () => {
     const status = button.closest('.contact-entry').querySelector('.copy-status');
     try { await navigator.clipboard.writeText(button.dataset.email); status.textContent = t.copied; }
