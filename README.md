@@ -1,53 +1,32 @@
-# 程一鸣 · Yiming Cheng
+# Personal Website
 
-中英双语个人主页，基于原生 HTML、CSS、JavaScript。保留简历中的教育、实习和研究项目，新增用户提供的个人介绍与学校邮箱。采用 Playful Editorial Design：白色、冰蓝、浅蓝、钴蓝与深海军蓝建立不同区域的视觉节奏，适配手机、平板与电脑。
+Personal website of Yiming Cheng.
 
-## 本地运行
+**Website:** [https://personal-website-peach-nu-83.vercel.app/](https://personal-website-peach-nu-83.vercel.app/)
 
-需要 Node.js 20 或更高版本，无第三方依赖，无需 `npm install`。
+## Overview
+
+A bilingual personal website featuring my background, professional experience, research projects, and skills.
+
+## Tech Stack
+
+- HTML
+- CSS
+- JavaScript
+- Vercel
+
+## Features
+
+- Chinese and English language support
+- Responsive design
+- Interactive navigation
+
+## Local Development
+
+Requires Node.js 20 or later. From the project directory, run:
 
 ```sh
-cd /workspace/personal-website
 npm run dev
 ```
 
-在运行机器上访问 `http://localhost:3000`。服务监听 `0.0.0.0:3000`；云环境使用其支持的端口预览方式。可通过 `PORT=3001 npm run dev` 更换端口。
-
-## 构建
-
-```sh
-npm run build
-npm run preview
-```
-
-产物输出到 `dist/`。预览前停止同端口开发服务，或运行 `PORT=3001 npm run preview`。构建命令与 `vercel.json` 保持一致。已有 Vercel 项目可在 GitHub `main` 更新后自动构建；不需要新增项目、环境变量或数据库。
-
-## 内容与维护
-
-- `app.js`：`content.zh` / `content.en` 存放双语内容，`emails` 数组统一管理两个邮箱及其复制按钮。
-- `styles.css`：统一的字体和留白体系、响应式编辑网格、键盘焦点、减少动画偏好与打印样式。
-- `index.html`：入口及静态元信息；禁用 JavaScript 时仍可查看两个邮箱。
-- `scripts/serve.mjs`：本地开发和产物预览服务器。
-- `scripts/build.mjs`：清理旧产物、复制网站文件，并将 `assets/` 中的图片原样复制到 `dist/assets/`；不发布资源目录中的说明文件。
-
-首页第一屏仅展示中英文姓名、用户原始头像和向下浏览提示，以蓝色背景块和少量几何形状构图；不包含博士身份、学校、兴趣、经历或口号。身份、兴趣与实习概览完整保留在 About 与后续板块。
-
-About 使用浅蓝背景与独立的猫狗愿望便签；Education 使用三列模块；Internships（实习经历）使用左右交替的机构面板与工作详情；Research 仅展示名称、时间与原有项目内容，去掉重复摘要、标签和展开层；Skills 精简为两栏：编程与数据（Python、R）及 AI 工具与开发（LLM API 调用、Codex、Vibe coding）；Contact 使用深蓝背景、双邮箱和学校主页链接。布局在手机上转为单列，没有虚构的图表或成果。
-
-语言偏好只存储在浏览器本地。实习详情使用原生展开控件，第一段默认展开；研究正文直接展示。切换语言时保留实习详情的展开及收起状态。两个邮箱均支持邮件链接与独立复制反馈；复制权限不可用时提示手动选择。学校个人主页在新标签页打开，并设置 `noopener noreferrer`。滚动入场只做轻微位移，内容始终可读；`prefers-reduced-motion` 会关闭动画和移动效果。
-
-## 信息来源与当前限制
-
-教育、实习、研究项目的机构、日期、职位与成果数字依据提供的简历保留。按用户最新要求，西南大学的“211 工程”说明已移除；About 前两段合并，顶栏和页脚标识统一为 `yiming`。技能中的 Codex 与 Vibe coding 来自用户本轮补充。博士二年级、AI 行业与科技投资兴趣、毕业后养小狗或小猫的愿望，以及学校邮箱均由用户本次提供。无论文、社交账号或其他个人信息的补充推断。
-
-已删除所有号码与可拨打链接，仅展示常用邮箱和学校邮箱。原始 PDF 不属于网站资源。简历中的到岗安排未作为当前状态展示。
-
-头像使用用户通过 ZIP 提供的 940 × 940 PNG 原图，原样保存为 `assets/avatar.png`。没有生成、重绘、压缩或裁剪图片；`object-fit: contain` 保留完整画面，尺寸与圆角由现有 CSS 控制。构建将图片按原始字节复制到 `dist/assets/avatar.png`。原图、项目文件及构建产物的 SHA-256 一致：`6fcd7ae65530f401016a938794b2045598dd7b8c462fd3daedf1c2967598eb91`。
-
-## 验证
-
-本轮逐项验证六项指定修改的中英文页面，并确认实习内容和研究项目原始正文未变、教育数据仅移除指定说明、About 合并没有遗漏原文。使用 Chromium 在构建产物上实际检查 1920、1440、768、390 像素布局：无水平溢出，技能在桌面/平板为两栏、手机为单列，原始头像正常加载。
-
-另行验证邮箱复制、实习详情开合、手机导航与学校链接的新标签页配置；没有浏览器异常或资源加载失败。静态构建、JavaScript 语法及差异检查通过。
-
-学校主页地址按用户提供的原链接保留。云环境代理拒绝该域名的 CONNECT 请求（403），因此仅验证链接配置与打开方式，未能验证目标页面的实际响应。
+Open http://localhost:3000 in your browser.
